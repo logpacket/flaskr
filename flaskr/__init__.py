@@ -2,7 +2,6 @@ import os
 
 from flask import Flask
 
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -40,3 +39,16 @@ def create_app(test_config=None):
     app.add_url_rule('/', endpoint='index')
 
     return app
+
+class CustomProxyFix(object):
+
+    def __init__(self, app):
+        self.app = app
+
+    def __call__(self, environ, start_response):
+        host = environ.get('HTTP_X_FHOST', '')
+        if host:
+            environ['HTTP_HOST'] = host
+        return self.app(environ, start_response)
+
+app.wsgi_app = CustomProxyFix(app.wsgi_app)
