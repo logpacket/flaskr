@@ -2,22 +2,9 @@ import os
 
 from flask import Flask
 
-
-class CustomProxyFix(object):
-
-    def __init__(self, app):
-        self.app = app
-
-    def __call__(self, environ, start_response):
-        host = environ.get('HTTP_X_FHOST', '')
-        if host:
-            environ['HTTP_HOST'] = host
-        return self.app(environ, start_response)
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    app.wsgi_app = CustomProxyFix(app.wsgi_app)
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
@@ -52,3 +39,5 @@ def create_app(test_config=None):
     app.add_url_rule('/', endpoint='index')
 
     return app
+
+app = create_app()
