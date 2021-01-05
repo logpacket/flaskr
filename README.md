@@ -1,7 +1,7 @@
 flaskr(연습 프로젝트)
 ======
 
-##실행법
+## 실행법
 1. 설치 할 폴더로 이동 및 cmd 실행
 2. git clone https://gihub.com/logpacket/flaskr.git
 3. pip install virtualenv 로 virtualenv 설치
@@ -16,6 +16,6 @@ flaskr(연습 프로젝트)
 12. flask run
 13. http://localhost:5000 접속
 
-###설명이 필요하면 연락하도록
-###출처
-####http://flask.pocoo.org/docs/1.0/tutorial/
+### 설명이 필요하면 연락하도록
+### 출처
+#### http://flask.pocoo.org/docs/1.0/tutorial/
